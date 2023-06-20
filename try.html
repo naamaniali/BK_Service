@@ -1,0 +1,65 @@
+<div class="order_area">
+    <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="section_title mb-70">
+                        <h3>Our Catering Menu</h3>
+                        <p>inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards <br> especially in the workplace. That’s why it’s crucial that, as women.</p>
+                    </div>
+                </div>
+            </div>
+
+            <?php include 'Menu.php'; 
+
+ $result = $conn->query("SELECT image, description FROM menu_home"); 
+    
+ if ($result->num_rows > 0) {
+    // Output data of each row
+
+    // Initialize counter
+    $counter = 1;
+
+    while ($row = $result->fetch_assoc()) {
+        $image = $row["image"];
+        $description = $row["description"];
+
+            $html = '
+        <div class="row">
+            <div class="col-xl-4 col-md-6">
+                <div class="single_order">
+                    <div class="order_thumb">
+                        <img src= alt="Fuck">
+                        
+                    </div>
+                    <div class="order_info">
+                        <h3><a href="#">' . $description . '</a></h3>
+                        <p>1 Meal   |  2 Meal <br>
+                                3 Meal   |   4 Meal <br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            </div>
+            
+';
+
+// Echo or output the HTML code
+echo $html;
+
+// Increment counter
+$counter++;
+}
+} else {
+echo "No records found in the table.";
+}
+
+$conn->close();
+    
+
+
+
+
+?>
+
+</div>
+</div>
