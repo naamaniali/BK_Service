@@ -1,6 +1,4 @@
-<!doctype html>
-<html>
-<head>
+
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title><?php echo $pageTitle; ?></title>
@@ -23,8 +21,4 @@
     <link rel="stylesheet" href="css/slicknav.css">
     <link rel="stylesheet" href="css/style.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
-</head>
 
-
-
-</html>

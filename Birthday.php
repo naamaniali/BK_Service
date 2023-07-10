@@ -3,8 +3,8 @@
 
 <head>
     <?php $pageTitle = "Birthday Service"; ?>
-    <meta name="description" content="Birthday catering: Delicious food and delightful desserts tailored to make your special day unforgettable. Let us handle the feast!">
-    <meta name="keyword" content="Best Birthday">
+    <meta name="description" content="Make your birthday truly special with our exceptional birthday celebration services. Our personalized packages offer a memorable experience filled with fun, entertainment, and themed decorations. Let us take care of all the planning and create an unforgettable birthday party tailored just for you.">
+    <meta name="keyword" content="birthday celebration, memorable birthday, personalized experience, fun-filled party, birthday venue, birthday packages, birthday planning, party entertainment, birthday activities, themed decorations">
       <?php include 'load.php'; ?>
 </head>
 
@@ -24,7 +24,7 @@
             <div class="breadcam_inner">
                 <div class="breadcam_text">
                     <h3>Best Birthday with Us</h3>
-                    <p>inappropriate behavior is often laughed off as “boys will be boys,” women <br> face higher conduct standards especially in the workplace. That’s why it’s <br> crucial that, as women.</p>
+                    <p>Experience the best birthday celebration with us, where every moment is filled with joy, laughter, and unforgettable memories<br> Indulge in a personalized birthday experience crafted to perfection, making your special day truly extraordinary.</p>
                 </div>
             </div>
     </div>
@@ -32,7 +32,7 @@
     <?php
 include 'Menu.php';
 
-$result = $conn->query("SELECT id, name, img, description, tdescription, Client, want_client FROM Birthday");
+$result = $conn->query("SELECT * FROM Birthday");
 
 if ($result->num_rows > 0) {
     // Fetch all records from the database
@@ -59,6 +59,7 @@ if ($result->num_rows > 0) {
             $tdescription = $row["tdescription"];
             $Client = $row["Client"];
             $cwant = $row["want_client"];
+            $section = $row["section"];
 
             // Generate the dynamic class name based on the container type
             $class = 'single_about_area ' . $containerType;
@@ -71,20 +72,20 @@ if ($result->num_rows > 0) {
                             <div class="row align-items-center">
                                 <div class="col-xl-5 col-lg-5">
                                     <div class="single_about_text">
-                                        <h2><i>Our Catering Menu</i></h2><br/>
+                                        <h2><i>' . $section . '</i></h2><br/>
 
                                         <h3>' . $name . '<br>Courses <br></h3>
                                         <p class="about_text1">' . $description . '</p>
                                         <p class="about_text2">' . $tdescription . '</p>
                                         <div class="order_info">
-                                            <h1>' . $Client . '</h1>
+                                            <h6>' . $Client . '</h6>
                                             <p>' . preg_replace('/ {4,}/', '<br>', $cwant) . '</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-xl-6 offset-xl-1 col-lg-6 offset-lg-1">
                                     <div class="single_about_thumb thumb_n1">
-                                        <img src="' . $image . '" alt="">
+                                        <img src="' . $image . '" alt="Birthday Picture">
                                     </div>
                                 </div>
                             </div>
@@ -98,16 +99,17 @@ if ($result->num_rows > 0) {
                             <div class="row align-items-center">
                                 <div class="col-xl-6 col-lg-6">
                                     <div class="single_about_thumb thumb_n2">
-                                        <img src="' . $image . '" alt="">
+                                        <img src="' . $image . '" alt="Birthday Picture">
                                     </div>
                                 </div>
                                 <div class="col-xl-5 offset-xl-1 col-lg-5 offset-lg-1">
                                     <div class="single_about_text">
+                                    <h2><i>' . $section . '</i></h2><br/>
                                         <h3>' . $name . '</h3>
                                         <p class="about_text1">' . $description . '</p>
                                         <p class="about_text2">' . $tdescription . '</p>
                                         <div class="order_info">
-                                            <h1>' . $Client . '</h1>
+                                            <h6>' . $Client . '</h6>
                                             <p>' . $cwant . '</p>
                                         </div>
                                     </div>

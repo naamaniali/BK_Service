@@ -3,6 +3,9 @@
 
 <head>
     <?php $pageTitle = "About"; ?>
+    <meta name="description" content="Experience top-tier catering services in Lebanon, offering exquisite cuisine and flawless execution for unforgettable events and memorable dining experiences.">
+    <meta name="keyword" content="Best catering in Lebanon, Mission, Vision">
+    <meta name="author" content="Karim Group">
       <?php include 'load.php'; ?>
 </head>
 
@@ -22,110 +25,115 @@
             <div class="breadcam_inner">
                 <div class="breadcam_text">
                     <h3>About Us</h3>
-                    <p>inappropriate behavior is often laughed off as “boys will be boys,” women <br> face higher conduct standards especially in the workplace. That’s why it’s <br> crucial that, as women.</p>
+                    <p>As the premier choice for catering in Lebanon, we specialize in creating bespoke culinary experiences,<br> tailored to your unique event needs. With our unrivaled expertise and passion for exceptional service,<br>we bring your vision to life, making every occasion truly unforgettable.</p>
                 </div>
             </div>
     </div>
     <!-- breadcam_area_end -->
 
     <!-- single_about_area_start -->
-    <div class="single_about_area">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-xl-5 col-lg-5">
-                    <div class="single_about_text">
-					<h1><i>Our Catering Menu</i></h1><br/>
-                        <h3>First <br>
-                            Courses <br>
-                            </h3>
-                            <p class="about_text1">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            </p>
-                            <p class="about_text2">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
-                            </p>
-							<div class="order_info">
-                            <h1>Our Client Choices</h1>
-                            <p>1 Meal   |  2 Meal <br>
-                                    3 Meal   |   4 Meal <br>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-6 offset-xl-1 col-lg-6 offset-lg-1">
-                    <div class="single_about_thumb thumb_n1">
-                        <img src="img/about/1.png" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- single_about_area_end -->
+    <?php
+include 'Menu.php';
 
-<!-- single_about_area_start -->
-    <div class="single_about_area">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-xl-6 col-lg-6">
-                    <div class="single_about_thumb thumb_n2">
-                        <img src="img/about/2.png" alt="">
-                    </div>
-                </div>
-                <div class="col-xl-5 offset-xl-1 col-lg-5 offset-lg-1">
-                    <div class="single_about_text">
-                        <h3>Second <br>
-                            Courses <br>
-                            </h3>
-                            <p class="about_text1">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            </p>
-                            <p class="about_text2">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
-                            </p>
-							<div class="order_info">
-                            <h1>Our Client Choices</h1>
-                           <p>1 Meal   |  2 Meal <br>
-                                    3 Meal   |   4 Meal <br>
-                            </p>
+$result = $conn->query("SELECT * FROM about_us");
+
+if ($result->num_rows > 0) {
+    // Fetch all records from the database
+    $rows = $result->fetch_all(MYSQLI_ASSOC);
+
+    // Define the mapping array for container types
+    $containerTypes = array(
+        1 => 'menu_section',
+        2 => 'other_style',
+        3 => 'menu_section'
+        // Add more mappings as needed
+    );
+
+    // Process each record and generate HTML code for each container
+    foreach ($rows as $row) {
+        $id = $row["id"];
+
+        // Check if the container type exists for the given ID
+        if (isset($containerTypes[$id])) {
+            $containerType = $containerTypes[$id];
+            $name = $row["name"];
+            $image = $row["img"];
+            $description = $row["description"];
+            $tdescription = $row["tdescription"];
+            $Client = $row["Values"];
+            $cwant = $row["our"];
+            $section = $row["section"];
+
+
+            // Generate the dynamic class name based on the container type
+            $class = 'single_about_area ' . $containerType;
+
+            // Generate the HTML code based on the container type
+            if ($containerType === 'menu_section') {
+                $html = '
+                    <div class="' . $class . '">
+                        <div class="container">
+                            <div class="row align-items-center">
+                                <div class="col-xl-5 col-lg-5">
+                                    <div class="single_about_text">
+                                        <h2><i>' . $section . '</i></h2><br/>
+
+                                        <h3>' . $name . '<br></h3>
+                                        <p class="about_text1">' . $description . '</p>
+                                        <p class="about_text2">' . $tdescription . '</p>
+                                        <div class="order_info">
+                                            <h1>' . $Client . '</h1>
+                                            <p>' . preg_replace('/ {4,}/', '<br>', $cwant) . '</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 offset-xl-1 col-lg-6 offset-lg-1">
+                                    <div class="single_about_thumb thumb_n1">
+                                        <img src="' . $image . '" alt="Birthday Picture">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- single_about_area_end -->
-    
-     <!-- single_about_area_start -->
-    <div class="single_about_area">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-xl-5 col-lg-5">
-                    <div class="single_about_text">
-                        <h3>Final <br>
-                            Courses <br>
-                            </h3>
-                            <p class="about_text1">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            </p>
-                            <p class="about_text2">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
-                            </p>
-							<div class="order_info">
-                            <h1>Our Client Choices</h1>
-                            <p>1 Meal   |  2 Meal <br>
-                                    3 Meal   |   4 Meal <br>
-                            </p>
+                ';
+            } else {
+                $html = '
+                    <div class="' . $class . '">
+                        <div class="container">
+                            <div class="row align-items-center">
+                                <div class="col-xl-6 col-lg-6">
+                                    <div class="single_about_thumb thumb_n2">
+                                        <img src="' . $image . '" alt="Birthday Picture">
+                                    </div>
+                                </div>
+                                <div class="col-xl-5 offset-xl-1 col-lg-5 offset-lg-1">
+                                    <div class="single_about_text">
+                                    <h2><i>' . $section . '</i></h2><br/>
+                                        <h3>' . $name . '</h3>
+                                        <p class="about_text1">' . $description . '</p>
+                                        <p class="about_text2">' . $tdescription . '</p>
+                                        <div class="order_info">
+                                            <h1>' . $Client . '</h1>
+                                            <p>' . $cwant . '</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-6 offset-xl-1 col-lg-6 offset-lg-1">
-                    <div class="single_about_thumb thumb_n2">
-                        <img src="img/about/2.png" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                ';
+            }
+
+            // Echo or output the HTML code
+            echo $html;
+        }
+    }
+} else {
+    echo "No records found in the table.";
+}
+
+$conn->close();
+?>
     <!-- single_about_area_end -->
 
    <!-- footer-start -->

@@ -31,9 +31,9 @@
                     <div class="slider_contant text-center">
                         <h3>Food Catering <br>
                             Service.</h3>
-                            <p>inappropriate behavior is often laughed off as “boys will be boys,” women <br>
-                            face higher conduct standards especially in the workplace. That’s why it’s <br>
-                                crucial that, as women.</p>
+                            <p>BK for Food and Services is dedicated to providing top-quality catering services that exceed expectations,<br>
+                            Our experienced team crafts delectable menus, delivers exceptional service, and pays careful attention to detail.<br>
+                            Trust us to elevate your events with unforgettable culinary experiences that leave a lasting impression.</p>
                     </div>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                 <div class="col-xl-12">
                     <div class="section_title mb-60">
                         <h3>Our Services: Best Catering in Lebanon</h3>
-                        <p>inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards <br> especially in the workplace. That’s why it’s crucial that, as women.</p>
+                        <p>Experience top-tier catering services in Lebanon, offering exquisite cuisine and flawless <br> execution for unforgettable events and memorable dining experiences.</p>
                     </div>
                 </div>
             </div>
@@ -57,7 +57,7 @@
 
             <?php include 'Menu.php'; 
 
-        $result = $conn->query("SELECT name, image, description FROM services_home"); 
+        $result = $conn->query("SELECT Id, name, image, description FROM services_home"); 
    
        if ($result->num_rows > 0) {
          // Output data of each row
@@ -65,12 +65,19 @@
    
 
       while ($row = $result->fetch_assoc()) {
+        $id = $row["Id"];
       $name = $row["name"];
         $image = $row["image"];
        $description = $row["description"];
-       $sectionId = urlencode($name); // Encode the name as the section identifier
+
+//$sectionId = urlencode($name); // Encode the name as the section identifier
 
 //<a href="service.php#' . $name . '"> 
+
+//if ($id == 6) {
+ //  $name = str_replace(' ', '_', $name); // Replace spaces with underscores in the name for id = 6
+ //}
+
        $html = '
 
     <div class="col-xl-4 col-md-6">
@@ -116,8 +123,8 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="section_title mb-70">
-                        <h3>Our Food and Services Catering Menu</h3>
-                        <p>inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards <br> especially in the workplace. That’s why it’s crucial that, as women.</p>
+                        <h3>Our Food and Services: Catering Menu</h3>
+                        <p>Delectable culinary creations and exceptional service offered in our Catering Menu, <br> ensuring a memorable experience for your event.</p>
                     </div>
                 </div>
             </div>
@@ -125,7 +132,7 @@
 
             <?php include 'Menu.php'; 
 
- $result = $conn->query("SELECT image, description FROM menu_home"); 
+ $result = $conn->query("SELECT menu_name, image, description FROM menu_home"); 
     
         if ($result->num_rows > 0) {
           // Output data of each row
@@ -133,6 +140,7 @@
     
 
     while ($row = $result->fetch_assoc()) {
+        $menu_name = $row["menu_name"];
         $image = $row["image"];
         $description = $row["description"];
 
@@ -145,7 +153,8 @@
                         
                     </div>
                     <div class="order_info">
-                        <h3><a href="#">' . $description . '</a></h3>
+                        <h3><a href="#">' . $menu_name . '</a></h3>
+                        <p>' . $description . '</p>
                         <p>1 Meal   |  2 Meal <br>
                                 3 Meal   |   4 Meal <br>
                         </p>

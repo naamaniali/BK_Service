@@ -3,6 +3,8 @@
 
 <head>
     <?php $pageTitle = "Teams"; ?>
+    <meta name="description" content="Discover our exceptional team of professionals dedicated to delivering outstanding services and creating unforgettable experiences. With their expertise and attention to detail, our team is committed to exceeding expectations and ensuring your satisfaction.">
+    <meta name="keyword" content="">
       <?php include 'load.php'; ?>
 </head>
 
@@ -22,7 +24,7 @@
         <div class="breadcam_inner">
             <div class="breadcam_text">
                 <h3>Our Teams</h3>
-                <p>inappropriate behavior is often laughed off as “boys will be boys,” women <br> face higher conduct standards especially in the workplace. That’s why it’s <br> crucial that, as women.</p>
+                <p>Meet our talented team of professionals who are passionate about creating unforgettable experiences. <br> With their expertise and attention to detail, they are committed to delivering exceptional service and ensuring your event is nothing short of extraordinary.</p>
             </div>
         </div>
     </div>
@@ -35,7 +37,7 @@
                    <center> <div class="col-xl-12">
                         <div class="section_title mb-70">
                             <h3>Meet Our Team</h3>
-                            <p>inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards <br> especially in the workplace. That’s why it’s crucial that, as women.</p>
+                            <p>Introducing our skilled team of culinary artists who bring artistry and innovation to every dish.<br> With their expertise and passion for gastronomy, they create delightful flavors and exquisite presentations that will tantalize your taste buds and leave a lasting impression.</p>
                         </div>
                     </div></center>
                 </div>

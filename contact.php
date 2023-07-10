@@ -2,8 +2,121 @@
 <html class="no-js" lang="zxx">
 
 <head>
+    <style>
+
+
+    </style>
     <?php $pageTitle = "Contact"; ?>
       <?php include 'load.php'; ?>
+      <?php
+
+        use PHPMailer\PHPMailer\PHPMailer;
+        use PHPMailer\PHPMailer\Exception;
+
+        require 'phpmailer/src/Exception.php';
+
+        require 'phpmailer/src/PHPMailer.php';
+
+        require 'phpmailer/src/SMTP.php';
+
+
+        $mail = new PHPMailer();
+
+
+    // define variables and set to empty values
+    $nameErr = $emailErr = $messageErr = "";
+    $formAction="";
+    $name = $email = $message = "";
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Set the default values for errors
+
+        if (empty($_POST["name"])) {
+            $nameErr = "Name is required";
+        } else {
+            $name = test_input($_POST["name"]);
+            // check if name only contains letters and whitespace
+            if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
+                $nameErr = "Only letters and white space allowed";
+            }else {
+                $nameErr = ""; // Clear the error variable since the email is valid
+            }
+        }
+
+        if (empty($_POST["email"])) {
+            $emailErr = "Email is required";
+        } else {
+            $email = test_input($_POST["email"]);
+            // check if e-mail address is well-formed
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $emailErr = "Invalid email format";
+            }else {
+                $emailErr = ""; // Clear the error variable since the email is valid
+            }
+        }
+
+        if (empty($_POST["message"])) {
+            $messageErr = "You forgot to write a message";
+        } else {
+            $message = test_input($_POST["message"]);
+        }
+
+        if (empty($nameErr) && empty($emailErr)) {
+
+            $mail->isSMTP();
+
+            $mail->Host = 'smtp.gmail.com';
+
+            $mail->SMTPAuth = true;
+
+            $mail->Username = 'my@gmail.com';
+
+             $mail->Password = 'password';
+
+            $mail->SMTPSecure = 'ssl';
+
+            $mail->Port = 465;
+
+             $mail->setFrom('my@gmail.com');
+
+            $mail->addAddress($_POST["email"]);
+
+            $mail->isHTML(true);
+
+            $mail->Subject = 'New Contact Form Submission';
+
+            $mail->Body = $_POST["message"];
+
+            $mail->send();
+
+            echo
+
+    "
+    <script>
+    alert('Sent good');
+
+    document.location.href = 'index.php';
+    
+    </script>
+    
+    ";
+
+        }
+        
+       
+
+        
+       
+    }
+
+    function test_input($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+    ?>
+    <link rel="stylesheet" href="contact.css">
 </head>
 
 <body>
@@ -35,7 +148,7 @@
                 <div class="row">
                    
                     <div class="col-lg-8">
-                        <form class="form-contact contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+                        <form class="form-contact contact_form" action="" method="post" id="contactForm" novalidate="novalidate">
                             <div class="row">
 							<div class="mapouter">
 							<div class="gmap_canvas">
@@ -76,6 +189,43 @@
                 </div>
             </div>
         </section>
+
+        <section id="contact" class="contact-section section_bg">
+    <div class="container">
+		<div class="contact-box">
+			<div class="left"></div>
+			<div class="right">
+				<h2>Contact Us</h2>
+                <form class="form-contact contact_form" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" id="contactForm" novalidate="novalidate">
+    <div class="form-group">
+        <input class="form-control field <?php echo (!empty($nameErr)) ? 'error-field' : ''; ?>" name="name" id="name" type="text" placeholder="Your Name" required>
+        <span class="error <?php echo (!empty($nameErr)) ? 'error-message' : ''; ?>"><?php echo $nameErr;?></span>
+    </div>
+    <div class="form-group">
+        <input class="form-control field <?php echo (!empty($emailErr)) ? 'error-field' : ''; ?>" name="email" id="email" type="email" placeholder="Your Email" required>
+        <span class="error <?php echo (!empty($emailErr)) ? 'error-message' : ''; ?>"><?php echo $emailErr;?></span>
+    </div>
+    <div class="form-group">
+        <textarea class="form-control field <?php echo (!empty($messageErr)) ? 'error-field' : ''; ?>" name="message" id="message" cols="30" rows="9" placeholder="Write your message here" required></textarea>
+        <span class="error <?php echo (!empty($messageErr)) ? 'error-message' : ''; ?>"><?php echo $messageErr;?></span>
+    </div>
+    <div class="form-group">
+        <button type="submit" name="send" class="btn button button-contactForm">Send Message</button>
+    </div>
+</form>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<?php
+    
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && empty($nameErr) || empty($emailErr) || !empty($nameErr) || !empty($emailErr)) {
+        echo '<script>window.location.hash = "#contact";</script>';
+    }
+    ?>
+
     <!-- ================ contact section end ================= -->
 
   <!-- footer-start -->
@@ -112,6 +262,8 @@
     <script src="js/mail-script.js"></script>
 
     <script src="js/main.js"></script>
+
+    
 
 </body>
 

@@ -2,9 +2,11 @@
 <html class="no-js" lang="zxx">
 
 <head>
-    <?php $pageTitle = "Catering on Demand"; ?>
+    <?php $pageTitle = "Catering Service"; ?>
     <meta name="description" content="Make your wedding day truly memorable with our exceptional wedding catering services. From carefully crafted menus to flawless execution, we create a culinary experience that exceeds all your wedding dreams, ensuring an unforgettable celebration for you and your guests.">
-    <meta name="keyword" content="Wedding of your Dreams">
+    <meta name="keywords" content="Wedding catering Lebanon, Wedding caterers in Lebanon, Lebanese wedding catering, Wedding food services Lebanon, Catering for weddings in Lebanon, Wedding reception catering Lebanon, Wedding menu catering Lebanon, Wedding catering company Lebanon, Best wedding caterers in Lebanon, Wedding catering services in Lebanon">
+
+
       <?php include 'load.php'; ?>
 </head>
 
@@ -24,7 +26,7 @@
             <div class="breadcam_inner">
                 <div class="breadcam_text">
                     <h3>Wedding of your Dreams</h3>
-                    <p>inappropriate behavior is often laughed off as “boys will be boys,” women <br> face higher conduct standards especially in the workplace. That’s why it’s <br> crucial that, as women.</p>
+                    <p>Experience the wedding of your dreams with our exceptional services. From exquisite venue selections to personalized menus and flawless execution, <br> we are dedicated to turning your vision into a reality. Create lasting memories and celebrate your special day with the utmost elegance and perfection."</p>
                 </div>
             </div>
     </div>
@@ -32,7 +34,7 @@
     <?php
 include 'Menu.php';
 
-$result = $conn->query("SELECT id, name, img, description, tdescription, Client, want_client FROM catering");
+$result = $conn->query("SELECT * FROM catering");
 
 if ($result->num_rows > 0) {
     // Fetch all records from the database
@@ -59,6 +61,7 @@ if ($result->num_rows > 0) {
             $tdescription = $row["tdescription"];
             $Client = $row["Client"];
             $cwant = $row["want_client"];
+            $section = $row["section"];
 
             // Generate the dynamic class name based on the container type
             $class = 'single_about_area ' . $containerType;
@@ -71,13 +74,13 @@ if ($result->num_rows > 0) {
                             <div class="row align-items-center">
                                 <div class="col-xl-5 col-lg-5">
                                     <div class="single_about_text">
-                                        <h2><i>Our Catering Menu</i></h2><br/>
+                                        <h2><i>' . $section . '</i></h2><br/>
 
                                         <h3>' . $name . '<br>Courses <br></h3>
                                         <p class="about_text1">' . $description . '</p>
                                         <p class="about_text2">' . $tdescription . '</p>
                                         <div class="order_info">
-                                            <h1>' . $Client . '</h1>
+                                            <h6>' . $Client . '</h6>
                                             <p>' . preg_replace('/ {4,}/', '<br>', $cwant) . '</p>
                                         </div>
                                     </div>
@@ -103,11 +106,12 @@ if ($result->num_rows > 0) {
                                 </div>
                                 <div class="col-xl-5 offset-xl-1 col-lg-5 offset-lg-1">
                                     <div class="single_about_text">
+                                    <h2><i>' . $section . '</i></h2><br/>
                                         <h3>' . $name . '</h3>
                                         <p class="about_text1">' . $description . '</p>
                                         <p class="about_text2">' . $tdescription . '</p>
                                         <div class="order_info">
-                                            <h1>' . $Client . '</h1>
+                                            <h6>' . $Client . '</h6>
                                             <p>' . $cwant . '</p>
                                         </div>
                                     </div>

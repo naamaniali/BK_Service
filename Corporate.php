@@ -2,7 +2,7 @@
 <html class="no-js" lang="zxx">
 
 <head>
-    <?php $pageTitle = "Catering on Demand"; ?>
+    <?php $pageTitle = "Corporate Catering"; ?>
     <meta name="description" content="Make your wedding day truly memorable with our exceptional wedding catering services. From carefully crafted menus to flawless execution, we create a culinary experience that exceeds all your wedding dreams, ensuring an unforgettable celebration for you and your guests.">
     <meta name="keyword" content="Wedding of your Dreams">
       <?php include 'load.php'; ?>
